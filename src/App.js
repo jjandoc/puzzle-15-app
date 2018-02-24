@@ -10,7 +10,7 @@ class App extends Component {
     super();
     // Build out the initial array of numbered squares.
     // TODO: It'd be great to have the width and height of the puzzle board in
-    // squares be inputable by the user.
+    //   squares be inputable by the user.
     const initialPositions = [];
     const totalSquares = 16;
     for (let i = 1; i < totalSquares; i++) {
@@ -24,13 +24,6 @@ class App extends Component {
       isLoading: false,
       puzzleColumns: 4,
       puzzleImage: null,
-      // puzzleImage: {
-      //   "photo": "https://images.unsplash.com/photo-1503334849647-1d48ae0ba696?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&h=500&w=500&fit=crop&s=865ea60142dd947ca933f16889a52bd2",
-      //   "photographer": {
-      //     "name": "Yavor Punchev",
-      //     "link":"https://unsplash.com/@yavor"
-      //   }
-      // },
       puzzleRows: 4,
       isShowingNumbers: false
     }
@@ -85,9 +78,9 @@ class App extends Component {
       }
       return sum;
     }, 0);
-    // Determine the whether the blank space is on an odd or even row.
+    // Determine whether the blank space is on an odd or even row.
     // TODO: We're assuming a 4x4 row. It'd nice to refactor this to accept
-    // variable columns and rows.
+    //   variable columns and rows.
     const isBlankOnOddRowFromEnd = isOdd(Math.floor(
       (puzzleState.length - puzzleState.lastIndexOf(null)) / 4) + 1
     );
@@ -116,6 +109,9 @@ class App extends Component {
     });
   }
 
+  /**
+   * Fetches a new image, shuffles the puzzle, and resets the history.
+   */
   refreshPuzzle() {
     this.setState({isLoading: true});
     this.getRandomImage().then(image => {
@@ -128,6 +124,11 @@ class App extends Component {
     })
   }
 
+  /**
+   * Updates the state of the puzzle by swapping a selected tile's position with
+   * that of the blank space, and adds that state to the history.
+   * @param {number} i - Index of the square to be moved.
+   */
   handleSquareClick(i) {
     const history = this.state.history;
     const oldPuzzleState = history[history.length - 1];
@@ -162,6 +163,10 @@ class App extends Component {
     )
   }
 
+  /**
+   * Toggles whether to show or hide the numbers of the squares.
+   * @param {Event} event 
+   */
   toggleNumbers(event) {
     this.setState({
       isShowingNumbers: event.target.checked
