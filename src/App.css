@@ -1,0 +1,129 @@
+.App {
+  margin: 0 auto;
+  max-width: 570px;
+  padding: 15px;
+}
+
+.board-container {
+  position: relative;
+}
+
+@keyframes splash {
+  from {
+    opacity: 0;
+    transform: scale(0, 0);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1, 1.1);
+  }
+  to {
+    transform: scale(1, 1);
+  }
+}
+
+.congrats {
+  background: rgba(0, 0, 0, .5);
+  bottom: 20px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  left: 20px;
+  margin: 0;
+  position: absolute;
+  right: 20px;
+  text-align: center;
+  text-shadow: 4px 3px 0px rgba(0,0,0,0.15);
+  top: 20px;
+  z-index: 10;
+}
+
+.congrats-body {
+  animation: splash 1s normal forwards ease-in-out;
+}
+
+.congrats-title {
+  font-size: 30px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.congrats-score {
+  font-size: 16px;
+  margin: 0;
+}
+
+.congrats-solution {
+  bottom: 0;
+  filter: brightness(80%);
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: -1;
+}
+.controls {
+  margin: 15px -10px;
+  text-align: center;
+}
+
+.controls > button,
+.controls > label {
+  background: #f71b52;
+  border: none;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, .6) 0 2px 0 0;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 16px;
+  font-weight: bold;
+  height: 30px;
+  line-height: 30px;
+  margin: 5px 10px;
+  padding: 0 20px;
+  text-transform: uppercase;
+  transition: all 300ms ease-out;
+  vertical-align: middle;
+}
+
+.controls > button:hover,
+.controls > button:focus,
+.controls > label:hover,
+.controls > label:focus {
+  background: #d4043c;
+  outline: none;
+}
+
+.controls > button:active,
+.controls > label:active {
+  box-shadow: rgba(0, 0, 0, .6) 0 0 0 0;
+  transform: translateY(2px);
+}
+
+.controls > label > input {
+  margin: 0 5px 0 -5px;
+  position: relative;
+  top: -2px;
+}
+
+.attribution {
+  color: white;
+  font-size: 14px;
+  text-align: center;
+}
+
+.attribution a {
+  color: white;
+}
+
+@media screen and (min-width: 480px) {
+  .congrats-title {
+    font-size: 100px;
+  }
+
+  .congrats-score {
+    font-size: 24px;
+  }
+}

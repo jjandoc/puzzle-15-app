@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: sans-serif;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+body {
+  background: #8fd6ef;
+  display: flex;
+  flex-direction: column;
+}
+
+.root {
+  background: transparent;
+  margin: auto 0;
+}

@@ -1,0 +1,21 @@
+.board-wrapper {
+  background-color: lightgray;
+  border: 20px solid goldenrod;
+  border-radius: 10px;
+  box-sizing: content-box;
+  box-shadow: darkgoldenrod 0 10px 0 0;
+  height: 0;
+  padding-top: calc(100% - 40px);
+  position: relative;
+  width: calc(100% - 40px);
+}
+
+.board {
+  bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
