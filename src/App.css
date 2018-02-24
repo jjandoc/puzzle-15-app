@@ -23,7 +23,7 @@
 }
 
 .congrats {
-  background: rgba(0, 0, 0, .5);
+  background: rgba(0, 0, 0, 0.5);
   bottom: 20px;
   color: white;
   display: flex;
@@ -34,13 +34,13 @@
   position: absolute;
   right: 20px;
   text-align: center;
-  text-shadow: 4px 3px 0px rgba(0,0,0,0.15);
+  text-shadow: 4px 3px 0px rgba(0, 0, 0, 0.15);
   top: 20px;
   z-index: 10;
 }
 
 .congrats-body {
-  animation: splash .5s normal forwards ease-in-out;
+  animation: splash 0.5s normal forwards ease-in-out;
 }
 
 .congrats-title {
@@ -73,7 +73,7 @@
   background: #f71b52;
   border: none;
   border-radius: 4px;
-  box-shadow: rgba(0, 0, 0, .6) 0 2px 0 0;
+  box-shadow: rgba(0, 0, 0, 0.6) 0 2px 0 0;
   color: white;
   cursor: pointer;
   display: inline-block;
@@ -98,7 +98,7 @@
 
 .controls > button:active,
 .controls > label:active {
-  box-shadow: rgba(0, 0, 0, .6) 0 0 0 0;
+  box-shadow: rgba(0, 0, 0, 0.6) 0 0 0 0;
   transform: translateY(2px);
 }
 

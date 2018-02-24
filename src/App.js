@@ -5,7 +5,7 @@ import isEven from './utility/isEven';
 import isOdd from './utility/isOdd';
 import serialize from './utility/serialize';
 import shuffleArray from './utility/shuffleArray';
-import {UNSPLASH_API_ID, UNSPLASH_APP_ID} from './constants/config';
+import { UNSPLASH_API_ID, UNSPLASH_APP_ID } from './constants/config';
 import './App.css';
 
 class App extends Component {
@@ -29,7 +29,7 @@ class App extends Component {
       puzzleImage: null,
       puzzleRows: 4,
       isShowingNumbers: false
-    }
+    };
   }
 
   /**
@@ -41,35 +41,37 @@ class App extends Component {
     const options = {
       client_id: UNSPLASH_API_ID,
       h: 500,
-      w: 500,
-    }
-    const requestUrl =
-        `https://api.unsplash.com/photos/random?${serialize(options)}`;
-    return fetch(requestUrl).then(res => res.json())
-        .then(result => {
-          return {
-            photo: result.urls.custom,
-            photographer: {
-              name: result.user.name,
-              link: result.user.links.html
-            }
+      w: 500
+    };
+    const requestUrl = `https://api.unsplash.com/photos/random?${serialize(
+      options
+    )}`;
+    return fetch(requestUrl)
+      .then(res => res.json())
+      .then(result => {
+        return {
+          photo: result.urls.custom,
+          photographer: {
+            name: result.user.name,
+            link: result.user.links.html
           }
-        });
+        };
+      });
   }
 
   /**
-   * Determines if a puzzle state is solvable. See: 
+   * Determines if a puzzle state is solvable. See:
    * https://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html
    * for logic behind solvability. The TL;DR is:
-   *   a. If the grid width is odd, then the number of inversions in a solvable 
+   *   a. If the grid width is odd, then the number of inversions in a solvable
    *      situation is even.
-   *   b. If the grid width is even, and the blank is on an even row counting 
-   *      from the bottom (second-last, fourth-last etc), then the number of 
+   *   b. If the grid width is even, and the blank is on an even row counting
+   *      from the bottom (second-last, fourth-last etc), then the number of
    *      inversions in a solvable situation is odd.
-   *   c. If the grid width is even, and the blank is on an odd row counting 
-   *      from the bottom (last, third-last, fifth-last etc) then the number of 
+   *   c. If the grid width is even, and the blank is on an odd row counting
+   *      from the bottom (last, third-last, fifth-last etc) then the number of
    *      inversions in a solvable situation is even.
-   * @param {array} puzzleState 
+   * @param {array} puzzleState
    */
   isSolvable(puzzleState) {
     // Determine the number of inversions.
@@ -83,9 +85,11 @@ class App extends Component {
     }, 0);
     // Determine whether the blank space is on an odd or even row, counting
     // from the end.
-    const isBlankOnOddRowFromEnd = isOdd(Math.floor(
-      ((puzzleState.length - 1) - puzzleState.indexOf(null)) /
-          this.state.puzzleColumns) + 1
+    const isBlankOnOddRowFromEnd = isOdd(
+      Math.floor(
+        (puzzleState.length - 1 - puzzleState.indexOf(null)) /
+          this.state.puzzleColumns
+      ) + 1
     );
     return isBlankOnOddRowFromEnd ? isEven(inversions) : isOdd(inversions);
   }
@@ -117,7 +121,7 @@ class App extends Component {
    * TODO: Add some styles for the loading state.
    */
   refreshPuzzle() {
-    this.setState({isLoading: true});
+    this.setState({ isLoading: true });
     this.getRandomImage().then(image => {
       const newPuzzleState = this.getShuffledPuzzle();
       this.setState({
@@ -125,7 +129,7 @@ class App extends Component {
         puzzleImage: image,
         history: [newPuzzleState]
       });
-    })
+    });
   }
 
   /**
@@ -147,7 +151,7 @@ class App extends Component {
     });
   }
 
-  /** 
+  /**
    * Builds out the attribution link for Unsplash and the photographer.
    * @return {element|null}
    */
@@ -159,19 +163,23 @@ class App extends Component {
     const sourceParams = {
       utm_source: UNSPLASH_APP_ID,
       utm_medium: 'referral'
-    }
-    const photographerLink =
-        `${image.photographer.link}?${serialize(sourceParams)}`;
+    };
+    const photographerLink = `${image.photographer.link}?${serialize(
+      sourceParams
+    )}`;
     return (
       <p className="attribution">
-        Photo by <a href={photographerLink}>{image.photographer.name}</a> on <a href={`https://unsplash.com/?${serialize(sourceParams)}`}>Unsplash</a>
+        Photo by <a href={photographerLink}>{image.photographer.name}</a> on{' '}
+        <a href={`https://unsplash.com/?${serialize(sourceParams)}`}>
+          Unsplash
+        </a>
       </p>
-    )
+    );
   }
 
   /**
    * Toggles whether to show or hide the numbers of the squares.
-   * @param {Event} event 
+   * @param {Event} event
    */
   toggleNumbers(event) {
     this.setState({
@@ -199,28 +207,35 @@ class App extends Component {
                   Finished in {history.length - 1} moves.
                 </p>
               </div>
-              <div className="congrats-solution" style={{
-                backgroundImage: this.state.puzzleImage ?
-                    `url(${this.state.puzzleImage.photo})` : null}}></div>
+              <div
+                className="congrats-solution"
+                style={{
+                  backgroundImage: this.state.puzzleImage
+                    ? `url(${this.state.puzzleImage.photo})`
+                    : null
+                }}
+              />
             </div>
           ) : null}
           <Board
-              puzzleState={puzzleState}
-              rows={this.state.puzzleColumns}
-              columns={this.state.puzzleColumns}
-              image={this.state.puzzleImage ? this.state.puzzleImage.photo : null}
-              onClick={(i) => this.handleSquareClick(i)}
-              isShowingNumbers={this.state.isShowingNumbers}
-              disabled={isSolved} />
+            puzzleState={puzzleState}
+            rows={this.state.puzzleColumns}
+            columns={this.state.puzzleColumns}
+            image={this.state.puzzleImage ? this.state.puzzleImage.photo : null}
+            onClick={i => this.handleSquareClick(i)}
+            isShowingNumbers={this.state.isShowingNumbers}
+            disabled={isSolved}
+          />
         </div>
         <div className="controls">
           <button onClick={() => this.shufflePuzzle()}>Reshuffle</button>
           <button onClick={() => this.refreshPuzzle()}>New Puzzle</button>
           <label>
             <input
-                type="checkbox"
-                onChange={(e) => this.toggleNumbers(e)}
-                checked={this.state.isShowingNumbers} />
+              type="checkbox"
+              onChange={e => this.toggleNumbers(e)}
+              checked={this.state.isShowingNumbers}
+            />
             <span>Show Numbers</span>
           </label>
         </div>

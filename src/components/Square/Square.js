@@ -7,7 +7,7 @@ class Square extends Component {
     super();
     this.state = {
       animationClass: ''
-    }
+    };
   }
 
   /**
@@ -20,39 +20,43 @@ class Square extends Component {
    *   square below it both shift down.
    */
   handleClick() {
-    switch(this.props.adjacency) {
+    switch (this.props.adjacency) {
       case Adjacency.RIGHT:
-        this.setState({animationClass: 'slideLeft'});
+        this.setState({ animationClass: 'slideLeft' });
         break;
       case Adjacency.LEFT:
-        this.setState({animationClass: 'slideRight'});
+        this.setState({ animationClass: 'slideRight' });
         break;
       case Adjacency.ABOVE:
-        this.setState({animationClass: 'slideDown'});
+        this.setState({ animationClass: 'slideDown' });
         break;
       case Adjacency.BELOW:
-        this.setState({animationClass: 'slideUp'});
+        this.setState({ animationClass: 'slideUp' });
         break;
       default:
         return;
     }
     // TODO: Probably best to use requestAnimationFrame here.
     window.setTimeout(() => {
-      this.setState({animationClass: ''});
+      this.setState({ animationClass: '' });
       this.props.onClick();
-    }, 250)
+    }, 250);
   }
 
   render() {
-    const squareStyle = Object.assign({
-      borderRadius: 0
-    }, this.props.style);
+    const squareStyle = Object.assign(
+      {
+        borderRadius: 0
+      },
+      this.props.style
+    );
     return (
       <button
-          className={['square', this.state.animationClass].join(' ')}
-          style={squareStyle}
-          onClick={() => this.handleClick()}
-          disabled={this.props.disabled}>
+        className={['square', this.state.animationClass].join(' ')}
+        style={squareStyle}
+        onClick={() => this.handleClick()}
+        disabled={this.props.disabled}
+      >
         {this.props.isShowingNumber ? this.props.value : null}
       </button>
     );

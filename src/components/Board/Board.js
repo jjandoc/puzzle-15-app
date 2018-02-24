@@ -6,7 +6,7 @@ import './Board.css';
 class Board extends Component {
   /**
    * Calculates the background position of a given square.
-   * @param {number} value - The value of the square. 
+   * @param {number} value - The value of the square.
    * @return {string|null} - Either a background position string, or `null` if
    *   there is no passed value.
    */
@@ -14,14 +14,13 @@ class Board extends Component {
     if (!value) {
       return null;
     }
-    const {rows, columns} = this.props;
+    const { rows, columns } = this.props;
     // TODO: I'm not quite sure why I need to subtract 1 from columns and rows,
     //   but it's necessary to get the image to align properly. This would be a
     //   problem, though if columns or rows ever equalled 1.
-    const horizontalOffset = (100 / (columns - 1)) * ((value - 1) % columns);
-    const verticalOffset = (100 / (rows - 1)) *
-        (Math.floor((value - 1) / rows));
-    return `${horizontalOffset}% ${verticalOffset}%`;    
+    const horizontalOffset = 100 / (columns - 1) * ((value - 1) % columns);
+    const verticalOffset = 100 / (rows - 1) * Math.floor((value - 1) / rows);
+    return `${horizontalOffset}% ${verticalOffset}%`;
   }
 
   /**
@@ -30,7 +29,7 @@ class Board extends Component {
    * @return {string|null} - Either `above`, `left`, `right`, `below`, or `null`
    */
   getAdjacencyToBlank(index) {
-    const {puzzleState, rows} = this.props;
+    const { puzzleState, rows } = this.props;
     const blankIndex = puzzleState.indexOf(null);
     if (blankIndex + 1 === index && (blankIndex + 1) % rows !== 0) {
       return Adjacency.RIGHT;
@@ -52,8 +51,8 @@ class Board extends Component {
       backgroundSize: `${100 * this.props.rows}%`,
       height: `${100 / this.props.rows}%`,
       width: `${100 / this.props.columns}%`
-    }
-    
+    };
+
     return (
       <div className="board-wrapper">
         <div className="board">
@@ -63,14 +62,17 @@ class Board extends Component {
               backgroundImage: item ? `url(${this.props.image})` : null
             });
             const adjacency = this.getAdjacencyToBlank(i);
-            return <Square
-                value={item} 
-                key={i} 
+            return (
+              <Square
+                value={item}
+                key={i}
                 adjacency={adjacency}
                 onClick={() => this.props.onClick(i)}
                 disabled={this.props.disabled || !this.getAdjacencyToBlank(i)}
                 style={squareStyle}
-                isShowingNumber={this.props.isShowingNumbers} />
+                isShowingNumber={this.props.isShowingNumbers}
+              />
+            );
           })}
         </div>
       </div>

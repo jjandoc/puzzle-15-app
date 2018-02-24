@@ -4,7 +4,7 @@
  * @return {boolean}
  */
 function isOdd(num) {
-  return (num % 2) === 1;
-};
+  return num % 2 === 1;
+}
 
 export default isOdd;
