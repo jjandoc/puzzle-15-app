@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
-import Square from './Square.js';
+import Square from '../Square/Square';
+import Adjacency from '../../constants/Adjacency';
 import './Board.css';
-
-/** @enum {string} */
-export const Adjacency = {
-  ABOVE: 'above',
-  BELOW: 'below',
-  LEFT: 'left',
-  RIGHT: 'right'
-};
 
 class Board extends Component {
   /**

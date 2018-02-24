@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Adjacency } from './Board.js';
+import Adjacency from '../../constants/Adjacency';
 import './Square.css';
 
 class Square extends Component {
@@ -12,7 +12,7 @@ class Square extends Component {
 
   /**
    * Animates the tile as it moves by applying a css class and then removing it.
-   * Once the animation is complete (arbitrarily defined as lasting 300ms in
+   * Once the animation is complete (arbitrarily defined as lasting 250ms in
    * the CSS), remove the animating class and fire any passed click handler as
    * a callback.
    * TODO: It would be nice if we could shift multiple squares on a click,
@@ -40,7 +40,7 @@ class Square extends Component {
     window.setTimeout(() => {
       this.setState({animationClass: ''});
       this.props.onClick();
-    }, 300)
+    }, 250)
   }
 
   render() {

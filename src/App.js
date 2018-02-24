@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import Board from './components/Board.js';
-import {UNSPLASH_API_ID, UNSPLASH_APP_ID} from './config';
-import {areArraysEqual, isEven, isOdd, shuffleArray, serialize}
-    from './utility';
+import Board from './components/Board/Board';
+import areArraysEqual from './utility/areArraysEqual';
+import isEven from './utility/isEven';
+import isOdd from './utility/isOdd';
+import serialize from './utility/serialize';
+import shuffleArray from './utility/shuffleArray';
+import {UNSPLASH_API_ID, UNSPLASH_APP_ID} from './constants/config';
 import './App.css';
 
 class App extends Component {
@@ -125,9 +128,11 @@ class App extends Component {
   }
 
   /**
-   * Updates the state of the puzzle by swapping a selected tile's position with
-   * that of the blank space, and adds that state to the history.
+   * Updates the state of the puzzle by swapping a selected tile's position
+   * with that of the blank space, and adds that state to the history.
    * @param {number} i - Index of the square to be moved.
+   * TODO: It'd be nice to queue up moves in case the user is clicking squares
+   *   faster than it takes the square animation to complete.
    */
   handleSquareClick(i) {
     const history = this.state.history;
@@ -190,7 +195,9 @@ class App extends Component {
             <div className="congrats">
               <div className="congrats-body">
                 <h1 className="congrats-title">Dunzo!</h1>
-                <p className="congrats-score">Finished in {history.length - 1} moves.</p>
+                <p className="congrats-score">
+                  Finished in {history.length - 1} moves.
+                </p>
               </div>
               <div className="congrats-solution" style={{
                 backgroundImage: this.state.puzzleImage ?
