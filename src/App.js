@@ -81,11 +81,11 @@ class App extends Component {
       }
       return sum;
     }, 0);
-    // Determine whether the blank space is on an odd or even row.
-    // TODO: We're assuming a 4x4 row. It'd nice to refactor this to accept
-    //   variable columns and rows.
+    // Determine whether the blank space is on an odd or even row, counting
+    // from the end.
     const isBlankOnOddRowFromEnd = isOdd(Math.floor(
-      (puzzleState.length - puzzleState.lastIndexOf(null)) / 4) + 1
+      ((puzzleState.length - 1) - puzzleState.indexOf(null)) /
+          this.state.puzzleColumns) + 1
     );
     return isBlankOnOddRowFromEnd ? isEven(inversions) : isOdd(inversions);
   }
@@ -188,7 +188,6 @@ class App extends Component {
     const puzzleState = history[history.length - 1] || [];
     const isSolved = areArraysEqual(this.state.initialPositions, puzzleState);
     const attribution = this.getAttribution();
-
     return (
       <div className="App">
         <div className="board-container">
