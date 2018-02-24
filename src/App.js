@@ -114,6 +114,7 @@ class App extends Component {
 
   /**
    * Fetches a new image, shuffles the puzzle, and resets the history.
+   * TODO: Add some styles for the loading state.
    */
   refreshPuzzle() {
     this.setState({isLoading: true});
