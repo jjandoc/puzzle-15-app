@@ -17,7 +17,7 @@ class Board extends Component {
     const { rows, columns } = this.props;
     // TODO: I'm not quite sure why I need to subtract 1 from columns and rows,
     //   but it's necessary to get the image to align properly. This would be a
-    //   problem, though if columns or rows ever equalled 1.
+    //   problem, though, if columns or rows ever equalled 1.
     const horizontalOffset = 100 / (columns - 1) * ((value - 1) % columns);
     const verticalOffset = 100 / (rows - 1) * Math.floor((value - 1) / rows);
     return `${horizontalOffset}% ${verticalOffset}%`;

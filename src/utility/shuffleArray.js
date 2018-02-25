@@ -1,6 +1,7 @@
 /**
- * Randomize array element order in-place.
- * Using Durstenfeld shuffle algorithm.
+ * Randomize array element order in-place. Using Durstenfeld shuffle algorithm.
+ * @param {array} source - Array to be shuffled.
+ * @return {array} - A new, shuffled copy of the original array.
  */
 function shuffleArray(source) {
   const array = source.slice();
