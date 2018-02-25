@@ -72,6 +72,7 @@ class App extends Component {
    *      from the bottom (last, third-last, fifth-last etc) then the number of
    *      inversions in a solvable situation is even.
    * @param {array} puzzleState
+   * @return {boolean}
    */
   isSolvable(puzzleState) {
     // Determine the number of inversions.
@@ -83,8 +84,14 @@ class App extends Component {
       }
       return sum;
     }, 0);
-    // Determine whether the blank space is on an odd or even row, counting
-    // from the end.
+
+    // If the grid width is odd, the logic is pretty simple.
+    if (isOdd(this.state.puzzleColumns)) {
+      return isEven(inversions);
+    }
+
+    // Otherwise, determine whether the blank space is on an odd or even row,
+    // counting from the end.
     const isBlankOnOddRowFromEnd = isOdd(
       Math.floor(
         (puzzleState.length - 1 - puzzleState.indexOf(null)) /
