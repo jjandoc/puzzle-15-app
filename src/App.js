@@ -37,7 +37,7 @@ class App extends Component {
    * @return {Promise.<Object>} - A promise that resolves with an object
    *   containing the image URL and information about the photographer.
    */
-  getRandomImage() {
+  async getRandomImage() {
     const options = {
       client_id: UNSPLASH_API_ID,
       h: 500,
@@ -46,17 +46,15 @@ class App extends Component {
     const requestUrl = `https://api.unsplash.com/photos/random?${serialize(
       options
     )}`;
-    return fetch(requestUrl)
-      .then(res => res.json())
-      .then(result => {
-        return {
-          photo: result.urls.custom,
-          photographer: {
-            name: result.user.name,
-            link: result.user.links.html
-          }
-        };
-      });
+    const response = await fetch(requestUrl);
+    const result = await response.json();
+    return {
+      photo: result.urls.custom,
+      photographer: {
+        name: result.user.name,
+        link: result.user.links.html
+      }
+    };
   }
 
   /**
@@ -127,16 +125,20 @@ class App extends Component {
    * Fetches a new image, shuffles the puzzle, and resets the history.
    * TODO: Add some styles for the loading state.
    */
-  refreshPuzzle() {
+  async refreshPuzzle() {
     this.setState({ isLoading: true });
-    this.getRandomImage().then(image => {
+    try {
+      const image = await this.getRandomImage();
       const newPuzzleState = this.getShuffledPuzzle();
       this.setState({
         isLoading: false,
         puzzleImage: image,
         history: [newPuzzleState]
       });
-    });
+    } catch (err) {
+      console.error('error fetching a new image', err);
+      this.setState({ isLoading: false });
+    }
   }
 
   /**
