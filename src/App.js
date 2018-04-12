@@ -179,8 +179,13 @@ class App extends Component {
     )}`;
     return (
       <p className="attribution">
-        <a href={`${image.download}?${serialize(sourceParams)}`}>Photo</a> by{' '}
-        <a href={photographerLink}>{image.photographer.name}</a> on{' '}
+        <a
+          href={`${image.download}?${serialize(sourceParams)}`}
+          target="_blank"
+        >
+          Photo
+        </a>{' '}
+        by <a href={photographerLink}>{image.photographer.name}</a> on{' '}
         <a href={`https://unsplash.com/?${serialize(sourceParams)}`}>
           Unsplash
         </a>
