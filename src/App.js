@@ -53,7 +53,8 @@ class App extends Component {
       photographer: {
         name: result.user.name,
         link: result.user.links.html
-      }
+      },
+      download: result.links.html
     };
   }
 
@@ -178,7 +179,8 @@ class App extends Component {
     )}`;
     return (
       <p className="attribution">
-        Photo by <a href={photographerLink}>{image.photographer.name}</a> on{' '}
+        <a href={`${image.download}?${serialize(sourceParams)}`}>Photo</a> by{' '}
+        <a href={photographerLink}>{image.photographer.name}</a> on{' '}
         <a href={`https://unsplash.com/?${serialize(sourceParams)}`}>
           Unsplash
         </a>
